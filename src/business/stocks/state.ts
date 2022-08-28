@@ -14,7 +14,12 @@ export interface StocksState {
 export const state: StocksState = {
   tickers: null,
   ticker: null,
-  query: {},
+  query: {
+    active: true,
+    market: 'stocks',
+    limit: 10,
+    order: 'asc'
+  },
   isLoadingTickers: false,
   isLoadingTickerDetails: false,
   error: null

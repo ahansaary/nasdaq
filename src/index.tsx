@@ -7,7 +7,7 @@ import {config} from './business'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 
-const overmind = createOvermind(config)
+const overmind = createOvermind(config, {devtools: true})
 
 const rootElement = document.getElementById('root') as HTMLElement
 const root = ReactDOM.createRoot(rootElement)

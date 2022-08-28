@@ -8,7 +8,9 @@ const Api = axios.create({
 })
 
 Api.interceptors.request.use(config => {
-  config.headers!['Authorization'] = polygonKey
+  config.headers!['Authorization'] = `Bearer ${polygonKey}`
+
+  return config
 })
 
 export default Api

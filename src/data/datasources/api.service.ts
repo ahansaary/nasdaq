@@ -10,7 +10,9 @@ import Api from './api'
 export class ApiServiceImpl implements ApiService {
   async getStocks(params: GetStocksParams) {
     try {
-      const res = await Api.get<GetStocksResponse>('/', {params})
+      const res = await Api.get<GetStocksResponse>('/v3/reference/tickers', {
+        params
+      })
       return new DataSuccess<GetStocksResponse>(res.data)
     } catch (error) {
       const errorMessage = (error as AxiosError).message
@@ -20,7 +22,9 @@ export class ApiServiceImpl implements ApiService {
 
   async getStockDetails(params: GetStockDetailsParams) {
     try {
-      const res = await Api.get<GetStockDetailsResponse>('/', {params})
+      const res = await Api.get<GetStockDetailsResponse>(
+        `/v3/reference/tickers/${params.ticker}`
+      )
       return new DataSuccess<GetStockDetailsResponse>(res.data)
     } catch (error) {
       const errorMessage = (error as AxiosError).message
