@@ -4,7 +4,7 @@ import {FC} from 'react'
 // - User can see the developer's name at the bottom of the screen
 
 const SplashScreen: FC = () => {
-  return <>SplashScreen</>
+  return <div>SplashScreen</div>
 }
 
 export default SplashScreen
