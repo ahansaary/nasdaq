@@ -1,13 +1,22 @@
+import {createOvermind} from 'overmind'
+import {Provider as OvermindProvider} from 'overmind-react'
 import {StrictMode} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './app/App'
+import {config} from './business'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const overmind = createOvermind(config)
+
+const rootElement = document.getElementById('root') as HTMLElement
+const root = ReactDOM.createRoot(rootElement)
+
 root.render(
   <StrictMode>
-    <App />
+    <OvermindProvider value={overmind}>
+      <App />
+    </OvermindProvider>
   </StrictMode>
 )
 
