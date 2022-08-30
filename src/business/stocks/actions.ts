@@ -1,9 +1,10 @@
+import {debounce, filter, pipe} from 'overmind'
 import {DataFailed, DataSuccess} from 'src/domain/models/data-state.model'
 import {AppStoreContext} from '..'
 
 export const getStocks = async (
   {state, effects}: AppStoreContext,
-  search: string
+  search?: string
 ) => {
   state.stocks.isLoadingTickers = true
 
@@ -67,3 +68,13 @@ export const getStockDetails = async (
 
   state.stocks.isLoadingTickerDetails = false
 }
+
+export const searchStocks = pipe(
+  ({state}: AppStoreContext, search: string) => {
+    state.stocks.query.search = search
+    return search
+  },
+  filter((_, search) => search?.length > 2 || !search),
+  debounce(300),
+  getStocks
+)
