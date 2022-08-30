@@ -53,11 +53,21 @@ export const getStockDetails = async (
   {state, effects}: AppStoreContext,
   ticker: string
 ) => {
+  if (state.stocks.cache[ticker]?.ticker) {
+    const cachedValue = state.stocks.cache[ticker]?.ticker
+    state.stocks.ticker = {...cachedValue!}
+    return ticker
+  }
+
   state.stocks.isLoadingTickerDetails = true
 
   const res = await effects.stocks.api.getStockDetails({ticker})
 
   if (res instanceof DataSuccess) {
+    state.stocks.cache[ticker] = {
+      ticker: res.data.results,
+      previousClose: null
+    }
     state.stocks.ticker = res.data.results
     state.stocks.error = null
   }
@@ -75,11 +85,18 @@ export const getPreviousClose = async (
   {state, effects}: AppStoreContext,
   stocksTicker: string
 ) => {
+  if (state.stocks.cache[stocksTicker]?.previousClose) {
+    const cachedValue = state.stocks.cache[stocksTicker]?.previousClose
+    state.stocks.previousClose = {...cachedValue!}
+    return
+  }
+
   state.stocks.isLoadingPreviousClose = true
 
   const res = await effects.stocks.api.getPreviousClose({stocksTicker})
 
   if (res instanceof DataSuccess) {
+    state.stocks.cache[stocksTicker].previousClose = res.data
     state.stocks.previousClose = res.data
     state.stocks.error = null
   }

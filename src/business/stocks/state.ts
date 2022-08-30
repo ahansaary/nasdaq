@@ -8,6 +8,12 @@ export interface StocksState {
   ticker: TickerDetails | null
   previousClose: GetPreviousCloseResponse | null
   query: GetStocksParams
+  cache: {
+    [ticker: string]: {
+      ticker: TickerDetails | null
+      previousClose: GetPreviousCloseResponse | null
+    }
+  }
   isLoadingTickers: boolean
   isLoadingMoreTickers: boolean
   isLoadingTickerDetails: boolean
@@ -25,6 +31,7 @@ export const state: StocksState = {
     limit: 10,
     order: 'asc'
   },
+  cache: {},
   isLoadingTickers: true,
   isLoadingMoreTickers: false,
   isLoadingTickerDetails: true,
