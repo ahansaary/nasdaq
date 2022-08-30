@@ -7,6 +7,7 @@ export interface StocksState {
   ticker: TickerDetails | null
   query: GetStocksParams
   isLoadingTickers: boolean
+  isLoadingMoreTickers: boolean
   isLoadingTickerDetails: boolean
   error: string | null
 }
@@ -20,7 +21,8 @@ export const state: StocksState = {
     limit: 10,
     order: 'asc'
   },
-  isLoadingTickers: false,
-  isLoadingTickerDetails: false,
+  isLoadingTickers: true,
+  isLoadingMoreTickers: false,
+  isLoadingTickerDetails: true,
   error: null
 }

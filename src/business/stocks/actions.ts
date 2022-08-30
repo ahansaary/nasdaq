@@ -23,6 +23,31 @@ export const getStocks = async (
   state.stocks.isLoadingTickers = false
 }
 
+export const getMoreStocks = async ({state, effects}: AppStoreContext) => {
+  if (!state.stocks.tickers?.next_url) return
+
+  state.stocks.isLoadingMoreTickers = true
+
+  const res = await effects.stocks.api.getMoreStocks(
+    state.stocks.tickers.next_url
+  )
+
+  if (res instanceof DataSuccess) {
+    state.stocks.tickers = {
+      ...res.data,
+      results: [...state.stocks.tickers.results, ...res.data.results],
+      count: state.stocks.tickers.count + res.data.count
+    }
+    state.stocks.error = null
+  }
+
+  if (res instanceof DataFailed) {
+    state.stocks.error = res.error
+  }
+
+  state.stocks.isLoadingMoreTickers = false
+}
+
 export const getStockDetails = async (
   {state, effects}: AppStoreContext,
   ticker: string

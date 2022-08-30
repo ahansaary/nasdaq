@@ -10,6 +10,10 @@ export class ApiRepositoryImpl implements ApiRepository {
     return apiService.getStocks(params)
   }
 
+  getMoreStocks(nextUrl: string) {
+    return apiService.getMoreStocks(nextUrl)
+  }
+
   getStockDetails(params: GetStockDetailsParams) {
     return apiService.getStockDetails(params)
   }

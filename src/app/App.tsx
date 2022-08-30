@@ -1,5 +1,7 @@
+import Router from './Router'
+
 function App() {
-  return <>Nasdaq</>
+  return <Router />
 }
 
 export default App

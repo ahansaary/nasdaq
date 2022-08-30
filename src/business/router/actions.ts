@@ -1,4 +1,4 @@
-import {pipe, wait} from 'overmind'
+import {debounce, pipe, wait} from 'overmind'
 import {getStockDetails, getStocks} from '../stocks/actions'
 import {navigate, setActiveScreen} from './operators'
 import {Screen} from './state'
@@ -12,6 +12,7 @@ export const showSplashScreen = pipe(
 export const showExploreScreen = pipe(
   setActiveScreen(Screen.stocks),
   (_, payload) => payload.query.search,
+  debounce(300),
   getStocks
 )
 

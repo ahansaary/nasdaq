@@ -20,9 +20,9 @@ export const config = merge(
   })
 )
 
-export const useAppState = createStateHook()
-export const useActions = createActionsHook()
-export const useEffects = createEffectsHook()
-export const useReaction = createReactionHook()
+export const useAppState = createStateHook<AppStoreContext>()
+export const useActions = createActionsHook<AppStoreContext>()
+export const useEffects = createEffectsHook<AppStoreContext>()
+export const useReaction = createReactionHook<AppStoreContext>()
 
 export type AppStoreContext = IContext<typeof config>

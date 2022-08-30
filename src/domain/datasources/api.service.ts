@@ -7,6 +7,8 @@ import {GetStocksParams} from '../params/get-stocks.params'
 export interface ApiService {
   getStocks: (params: GetStocksParams) => Promise<DataState<GetStocksResponse>>
 
+  getMoreStocks: (nextUrl: string) => Promise<DataState<GetStocksResponse>>
+
   getStockDetails: (
     params: GetStockDetailsParams
   ) => Promise<DataState<GetStockDetailsResponse>>

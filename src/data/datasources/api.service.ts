@@ -20,6 +20,16 @@ export class ApiServiceImpl implements ApiService {
     }
   }
 
+  async getMoreStocks(nextUrl: string) {
+    try {
+      const res = await Api.get<GetStocksResponse>(nextUrl)
+      return new DataSuccess<GetStocksResponse>(res.data)
+    } catch (error) {
+      const errorMessage = (error as AxiosError).message
+      return new DataFailed<GetStocksResponse>(errorMessage)
+    }
+  }
+
   async getStockDetails(params: GetStockDetailsParams) {
     try {
       const res = await Api.get<GetStockDetailsResponse>(

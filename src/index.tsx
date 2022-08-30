@@ -1,6 +1,5 @@
 import {createOvermind} from 'overmind'
 import {Provider as OvermindProvider} from 'overmind-react'
-import {StrictMode} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './app/App'
 import {config} from './business'
@@ -13,11 +12,9 @@ const rootElement = document.getElementById('root') as HTMLElement
 const root = ReactDOM.createRoot(rootElement)
 
 root.render(
-  <StrictMode>
-    <OvermindProvider value={overmind}>
-      <App />
-    </OvermindProvider>
-  </StrictMode>
+  <OvermindProvider value={overmind}>
+    <App />
+  </OvermindProvider>
 )
 
 // If you want to start measuring performance in your app, pass a function
