@@ -1,8 +1,10 @@
 import {AxiosError} from 'axios'
 import {ApiService} from 'src/domain/datasources/api.service'
 import {DataFailed, DataSuccess} from 'src/domain/models/data-state.model'
+import {GetPreviousCloseResponse} from 'src/domain/models/get-previous-close-response.model'
 import {GetStockDetailsResponse} from 'src/domain/models/get-stock-details-response.model'
 import {GetStocksResponse} from 'src/domain/models/get-stocks-response.model'
+import {GetPreviousCloseParams} from 'src/domain/params/get-previous-close.params'
 import {GetStockDetailsParams} from 'src/domain/params/get-stock-details.params'
 import {GetStocksParams} from 'src/domain/params/get-stocks.params'
 import Api from './api'
@@ -39,6 +41,18 @@ export class ApiServiceImpl implements ApiService {
     } catch (error) {
       const errorMessage = (error as AxiosError).message
       return new DataFailed<GetStockDetailsResponse>(errorMessage)
+    }
+  }
+
+  async getPreviousClose(params: GetPreviousCloseParams) {
+    try {
+      const res = await Api.get<GetPreviousCloseResponse>(
+        `/v2/aggs/ticker/${params.stocksTicker}/prev`
+      )
+      return new DataSuccess<GetPreviousCloseResponse>(res.data)
+    } catch (error) {
+      const errorMessage = (error as AxiosError).message
+      return new DataFailed<GetPreviousCloseResponse>(errorMessage)
     }
   }
 }

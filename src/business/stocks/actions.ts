@@ -67,6 +67,28 @@ export const getStockDetails = async (
   }
 
   state.stocks.isLoadingTickerDetails = false
+
+  return ticker
+}
+
+export const getPreviousClose = async (
+  {state, effects}: AppStoreContext,
+  stocksTicker: string
+) => {
+  state.stocks.isLoadingPreviousClose = true
+
+  const res = await effects.stocks.api.getPreviousClose({stocksTicker})
+
+  if (res instanceof DataSuccess) {
+    state.stocks.previousClose = res.data
+    state.stocks.error = null
+  }
+
+  if (res instanceof DataFailed) {
+    state.stocks.error = res.error
+  }
+
+  state.stocks.isLoadingPreviousClose = false
 }
 
 export const searchStocks = pipe(

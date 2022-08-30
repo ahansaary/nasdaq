@@ -1,5 +1,5 @@
 import {debounce, pipe, wait} from 'overmind'
-import {getStockDetails, getStocks} from '../stocks/actions'
+import {getPreviousClose, getStockDetails, getStocks} from '../stocks/actions'
 import {navigate, setActiveScreen} from './operators'
 import {Screen} from './state'
 
@@ -19,5 +19,6 @@ export const showExploreScreen = pipe(
 export const showStockDetailsScreen = pipe(
   setActiveScreen(Screen.stockDetails),
   (_, payload) => payload.params.ticker,
-  getStockDetails
+  getStockDetails,
+  getPreviousClose
 )

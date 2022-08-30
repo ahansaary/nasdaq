@@ -1,3 +1,4 @@
+import {GetPreviousCloseParams} from 'src/domain/params/get-previous-close.params'
 import {GetStockDetailsParams} from 'src/domain/params/get-stock-details.params'
 import {GetStocksParams} from 'src/domain/params/get-stocks.params'
 import {ApiRepository} from 'src/domain/repositories/api.repository'
@@ -16,5 +17,9 @@ export class ApiRepositoryImpl implements ApiRepository {
 
   getStockDetails(params: GetStockDetailsParams) {
     return apiService.getStockDetails(params)
+  }
+
+  getPreviousClose(params: GetPreviousCloseParams) {
+    return apiService.getPreviousClose(params)
   }
 }
